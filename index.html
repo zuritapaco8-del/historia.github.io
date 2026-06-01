@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti 🌻❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:white;
+    overflow:hidden;
+}
+
+/* OVERLAY */
+#overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+#overlay button{
+    padding:15px 30px;
+    font-size:18px;
+    background:#ff4d6d;
+    color:white;
+    border:none;
+    border-radius:30px;
+}
+
+/* SPOTIFY */
+.spotify{
+    width:480px;
+    max-width:90vw;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#1f1f1f;
+    color:white;
+    padding:10px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.spotify img{
+    width:45px;
+    height:45px;
+    border-radius:8px;
+}
+
+/* CARTA */
+.card{
+    width:480px;
+    max-width:90vw;
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    border:4px solid #f5d76e;
+}
+
+/* TITULO */
+.titulo{
+    font-size:2rem;
+    color:#b22222;
+}
+
+/* TEXTO */
+.texto{
+    color:#444;
+    font-size:0.95rem;
+    margin-top:10px;
+    line-height:1.5;
+}
+
+/* IMAGEN */
+.imagen img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:18px;
+    border:3px solid #f5d76e;
+    margin-top:10px;
+}
+
+/* BOTONES */
+button{
+    padding:8px 18px;
+    border:none;
+    border-radius:30px;
+    margin:6px;
+    cursor:pointer;
+}
+
+.si{ background:#c71f1f; color:white; }
+.no{ background:#8b4513; color:white; }
+
+/* ANIMACION */
+.corazon-triste{
+    position:absolute;
+    font-size:18px;
+    color:#ff9aa2;
+    animation:lluvia 3s linear forwards;
+}
+
+@keyframes lluvia{
+    from{transform:translateY(-10vh);}
+    to{transform:translateY(110vh); opacity:0;}
+}
+
+.flotante{
+    position:absolute;
+    animation:subir linear infinite;
+    pointer-events:none;
+}
+
+@keyframes subir{
+    from{transform:translateY(110vh);}
+    to{transform:translateY(-120px);}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("m-L15nQT3QYK0xPPx");
+
+function enviarRespuesta(respuesta){
+    emailjs.send("service_xidmaiq","template_7x1juig",{
+        mensaje: "Tu crush respondió: " + respuesta
+    });
+}
+
+/* MUSICA */
+function iniciar(){
+    document.getElementById("overlay").style.display="none";
+    document.getElementById("musica").play();
+}
+
+/* SI */
+function si(){
+    alert("💖 Me hiciste muy feliz 🌻❤️");
+    enviarRespuesta("SÍ 💖");
+}
+
+/* NO */
+function no(){
+    alert("💔 Respondió que NO");
+    enviarRespuesta("NO 💔");
+
+    for(let i=0;i<25;i++){
+        let d=document.createElement("div");
+        d.className="corazon-triste";
+        d.innerHTML="💔";
+        d.style.left=Math.random()*100+"vw";
+        d.style.fontSize=(15+Math.random()*20)+"px";
+        document.body.appendChild(d);
+        setTimeout(()=>d.remove(),4000);
+    }
+}
+</script>
+
+
+<!-- OVERLAY -->
+<div id="overlay">
+    <h2>💖 Toca para entrar</h2>
+    <button onclick="iniciar()">Entrar 🌻</button>
+</div>
+
+
+<!-- CARTA -->
+<div class="card">
+
+    <h1 class="titulo">✨💖 Para Ti 💖✨</h1>
+
+    <div class="texto">
+       Quiero ser sincero contigo…desde que llegaste a mi vida, me gustaste más de lo que esperaba.💖✨
+       No eres solo alguien que me llama la atención, 
+	   eres alguien que me hace sentir cosas bonitas cuando hablo contigo o pienso en ti.
+       No sé qué pueda pasar en el futuro, pero sí sé que me gustaría intentarlo contigo,
+	   sin prisas, pero con ganas de hacer las cosas bien.
+       Me gustas, y me encantaría escribir una historia contigo.🌻
+    </div>
+
+    <div class="imagen">
+        <img src="https://i.pinimg.com/564x/66/f9/95/66f9956ad1b359b22305d12c94529aa7.jpg">
+    </div>
+
+    <div class="pregunta">
+        ¿Te gustaría hacer una historia bonita de amor conmigo? 🌻
+    </div>
+
+    <button class="si" onclick="si()">Sí 💖</button>
+    <button class="no" onclick="no()">No</button>
+
+</div>
+
+<!-- FLOTANTES -->
+<script>
+const emojis=["🌻","❤️","🤎"];
+
+for(let i=0;i<60;i++){
+    let e=document.createElement("div");
+    e.className="flotante";
+    e.innerHTML=emojis[Math.floor(Math.random()*3)];
+    e.style.left=Math.random()*100+"vw";
+    e.style.fontSize=(18+Math.random()*25)+"px";
+    e.style.animationDuration=(5+Math.random()*7)+"s";
+    document.body.appendChild(e);
+}
+</script>
+
+</body>
+</html>
